@@ -26,17 +26,18 @@
                                 <label class="form__box-field-label" for="job-position">سمت شغلی</label>
                                 <input class="form__box-field-text" type="text" id="job-position">
                             </div>
-                            <div class="form__box-field">
+                            <div class="form__box-field" id="emailContainer">
                                 <label class="form__box-field-label form__box-field-label--required" for="business-email">ایمیل کاری</label>
-                                <input class="form__box-field-text" type="text" id="business-email">
+                                <input class="form__box-field-text" type="text" id="businessEmail">
+                                <div class="form__box-field-error-message">ایمیل وارد شده معتبر نمیباشد.</div>
                             </div>
                             <div class="form__box-field">
                                 <label class="form__box-field-label form__box-field-label--required" for="phone-number">شماره تماس</label>
-                                <input class="form__box-field-text" type="text" id="phone-number">
+                                <input class="form__box-field-text" type="text" id="phoneNumber">
                             </div>
                             <div class="form__box-field">
                                 <label class="form__box-field-label" for="company-name">نام شرکت</label>
-                                <input class="form__box-field-text" type="text" id="company-name">
+                                <input class="form__box-field-text" type="text" id="companyName">
                             </div>
                             <div class="form__box-field">
                                 <label class="form__box-field-label" for="website">نشانی وب سایت</label>
@@ -70,8 +71,8 @@
                                 </ul>
                             </div>
                             <div class="form__box-field">
-                                <label class="form__box-field-label" for="service-required">سرویس مورد نیاز</label>
-                                <ul class="form__box-field-dropdown" id="service-required">
+                                <label class="form__box-field-label" for="serviceRequired">سرویس مورد نیاز</label>
+                                <ul class="form__box-field-dropdown" id="serviceRequired">
                                     <div class="form__box-field-dropdown-toggle">@svg('svg/sales-contact/arrow-down.svg')</div>
                                     <li class="form__box-field-dropdown-item">شبکه توزیع محتوا و امنیت (CDN & Security)</li>
                                     <li class="form__box-field-dropdown-item">رایانش ابری (Cloud Server & PaaS)</li>
@@ -90,7 +91,7 @@
                         </div>
                     </div>
                     <div class="form__submit-container">
-                        <button class="form__submit" id="submit">ارسال پیام</button>
+                        <button class="form__submit" id="salesContactSubmit">ارسال پیام</button>
                     </div>
                 </div>
             </section>

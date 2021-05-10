@@ -11047,11 +11047,28 @@ a.text-dark:focus {
 .form__box-field {
   flex: 0 0 100%;
   margin-bottom: 16px;
+  position: relative;
 }
 
 .form__box-field--full {
   flex: 0 0 100%;
   margin-top: 24px;
+}
+
+.form__box-field--error input {
+  border: 1px solid red;
+}
+
+.form__box-field--error .form__box-field-error-message {
+  display: block;
+}
+
+.form__box-field-error-message {
+  font-size: 14px;
+  color: red;
+  position: absolute;
+  left: 0;
+  display: none;
 }
 
 .form__box-field-label {
@@ -11159,6 +11176,16 @@ a.text-dark:focus {
   font-weight: 500;
   font-size: 18px;
   line-height: 28px;
+  transition: all 0.15s ease-in-out;
+}
+
+.form__submit--active {
+  background-color: #20C5BA;
+  color: #fff;
+}
+
+.form__submit--active:hover {
+  background-color: #00A09C;
 }
 
 @media (min-width: 768px) {
