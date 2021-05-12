@@ -11011,12 +11011,12 @@ a.text-dark:focus {
   text-align: right;
 }
 
-.form {
+.sales-contact-form {
   background-color: #f5f7fa;
   padding: 80px 0;
 }
 
-.form__title {
+.sales-contact-form__title {
   font-size: 24px;
   font-weight: 500;
   line-height: 62px;
@@ -11024,7 +11024,7 @@ a.text-dark:focus {
   margin-bottom: 16px;
 }
 
-.form__box {
+.sales-contact-form__box {
   background-color: #FFFFFF;
   border-radius: 16px;
   padding: 24px 16px;
@@ -11034,36 +11034,37 @@ a.text-dark:focus {
   color: #093D3F;
 }
 
-.form__box-title {
+.sales-contact-form__box-title {
   margin-bottom: 40px;
 }
 
-.form__box-fields {
+.sales-contact-form__box-fields {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.form__box-field {
+.sales-contact-form__box-field {
   flex: 0 0 100%;
   margin-bottom: 16px;
   position: relative;
 }
 
-.form__box-field--full {
+.sales-contact-form__box-field--full {
   flex: 0 0 100%;
   margin-top: 24px;
+  position: relative;
 }
 
-.form__box-field--error input {
+.sales-contact-form__box-field--error input {
   border: 1px solid red;
 }
 
-.form__box-field--error .form__box-field-error-message {
+.sales-contact-form__box-field--error .sales-contact-form__box-field-error-message {
   display: block;
 }
 
-.form__box-field-error-message {
+.sales-contact-form__box-field-error-message {
   font-size: 14px;
   color: red;
   position: absolute;
@@ -11071,18 +11072,18 @@ a.text-dark:focus {
   display: none;
 }
 
-.form__box-field-label {
+.sales-contact-form__box-field-label {
   display: block;
 }
 
-.form__box-field-label--required::after {
+.sales-contact-form__box-field-label--required::after {
   content: "*";
   font-size: 16px;
   font-weight: 600;
   color: #20c5ba;
 }
 
-.form__box-field-text {
+.sales-contact-form__box-field-text {
   width: 100%;
   padding: 0 20px;
   background: #EEF2F7;
@@ -11092,7 +11093,7 @@ a.text-dark:focus {
   outline: none;
 }
 
-.form__box-field-dropdown {
+.sales-contact-form__box-field-dropdown {
   list-style: none;
   background-color: #EEF2F7;
   border: 2px solid #EEF2F7;
@@ -11103,32 +11104,33 @@ a.text-dark:focus {
   display: flex;
   flex-flow: column;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 0;
 }
 
-.form__box-field-dropdown--open {
+.sales-contact-form__box-field-dropdown--open {
   background-color: #FFFFFF;
   border: 2px solid #20C5BA;
   max-height: 1000px;
   padding: 24px;
 }
 
-.form__box-field-dropdown--open .form__box-field-dropdown-toggle {
+.sales-contact-form__box-field-dropdown--open .sales-contact-form__box-field-dropdown-toggle {
   opacity: 0;
 }
 
-.form__box-field-dropdown-toggle {
+.sales-contact-form__box-field-dropdown-toggle {
   position: relative;
   transition: all 0.3s ease-in-out;
   opacity: 1;
 }
 
-.form__box-field-dropdown-toggle svg {
+.sales-contact-form__box-field-dropdown-toggle svg {
   position: absolute;
   top: 20px;
   left: 0px;
 }
 
-.form__box-field-dropdown-item {
+.sales-contact-form__box-field-dropdown-item {
   color: #465A71;
   padding: 8px 16px;
   border-radius: 12px;
@@ -11137,20 +11139,20 @@ a.text-dark:focus {
   transition: all 0.15s ease-in-out;
 }
 
-.form__box-field-dropdown-item--active {
+.sales-contact-form__box-field-dropdown-item--active {
   order: 1;
 }
 
-.form__box-field-dropdown-item:hover {
+.sales-contact-form__box-field-dropdown-item:hover {
   background-color: #EEF2F7;
 }
 
-.form__box-field-hint {
-  margin-top: 50px;
+.sales-contact-form__box-field-hint {
+  margin-top: 48px;
   color: #00A09C;
 }
 
-.form__box-field-textarea {
+.sales-contact-form__box-field-textarea {
   width: 100%;
   height: 218px;
   background-color: #EEF2F7;
@@ -11161,11 +11163,11 @@ a.text-dark:focus {
   overflow: hidden;
 }
 
-.form__submit-container {
+.sales-contact-form__submit-container {
   text-align: left;
 }
 
-.form__submit {
+.sales-contact-form__submit {
   background-color: #E7ECF4;
   color: #697D9A;
   border-radius: 12px;
@@ -11179,46 +11181,46 @@ a.text-dark:focus {
   transition: all 0.15s ease-in-out;
 }
 
-.form__submit--active {
+.sales-contact-form__submit--active {
   background-color: #20C5BA;
   color: #fff;
 }
 
-.form__submit--active:hover {
+.sales-contact-form__submit--active:hover {
   background-color: #00A09C;
 }
 
 @media (min-width: 768px) {
-  .form {
+  .sales-contact-form {
     padding: 128px 0;
   }
 
-  .form__title {
+  .sales-contact-form__title {
     font-size: 40px;
     margin-bottom: 32px;
   }
 
-  .form__box {
+  .sales-contact-form__box {
     padding: 48px 56px;
   }
 
-  .form__box-field {
+  .sales-contact-form__box-field {
     flex: 0 0 calc(50% - 20px);
   }
 }
 
-.bottom {
+.sales-contact-links {
   padding: 80px 0;
   background-color: #E7ECF4;
 }
 
-.bottom__boxes {
+.sales-contact-links__boxes {
   display: flex;
   justify-content: space-between;
   flex-flow: wrap;
 }
 
-.bottom__box {
+.sales-contact-links__box {
   background-color: #FFFFFF;
   border: 1px solid #B2C2D6;
   border-radius: 16px;
@@ -11227,15 +11229,15 @@ a.text-dark:focus {
   padding: 32px 40px;
 }
 
-.bottom__box:first-child {
+.sales-contact-links__box:first-child {
   margin-bottom: 16px;
 }
 
-.bottom__box-icon {
+.sales-contact-links__box-icon {
   margin-bottom: 24px;
 }
 
-.bottom__box-text {
+.sales-contact-links__box-text {
   margin-bottom: 16px;
   font-weight: 500;
   font-size: 18px;
@@ -11243,7 +11245,7 @@ a.text-dark:focus {
   color: #093D3F;
 }
 
-.bottom__box-button {
+.sales-contact-links__box-button {
   width: 240px;
   height: 48px;
   margin: auto;
@@ -11260,13 +11262,13 @@ a.text-dark:focus {
   transition: background-color 0.15s ease-in-out;
 }
 
-.bottom__box-button:hover {
+.sales-contact-links__box-button:hover {
   text-decoration: none;
   background-color: #00A09C;
   color: #fff;
 }
 
-.bottom__box-phone {
+.sales-contact-links__box-phone {
   width: 100%;
   height: 48px;
   margin: auto;
@@ -11283,25 +11285,25 @@ a.text-dark:focus {
 }
 
 @media (min-width: 768px) {
-  .bottom {
+  .sales-contact-links {
     padding: 128px 0;
   }
 
-  .bottom__box {
+  .sales-contact-links__box {
     flex: 0 0 calc(50% - 20px);
   }
 
-  .bottom__box:first-child {
+  .sales-contact-links__box:first-child {
     margin-bottom: 0px;
   }
 
-  .bottom__box-phone {
+  .sales-contact-links__box-phone {
     width: 100%;
   }
 }
 
 @media (min-width: 992px) {
-  .bottom__box-phone {
+  .sales-contact-links__box-phone {
     width: 352px;
   }
 }

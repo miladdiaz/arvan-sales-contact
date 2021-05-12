@@ -17379,29 +17379,57 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
 
 
 window.initSalesContact = function () {
-  var saleContactDropdownOpen = 'form__box-field-dropdown--open';
-  var saleContactDropdownItemActive = 'form__box-field-dropdown-item--active';
+  var saleContactDropdownOpen = 'sales-contact-form__box-field-dropdown--open';
+  var saleContactDropdownItemActive = 'sales-contact-form__box-field-dropdown-item--active';
   var saleContactFormData = {
-    name: '',
-    businessEmail: '',
-    phoneNumber: '',
-    message: ''
+    'sales-contact_form_field_name': '',
+    'sales-contact_form_field_business-email': '',
+    'sales-contact_form_field_phone-number': '',
+    'sales-contact_form_field_message': ''
   };
-  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.form__box-field-dropdown-item').forEach(function (saleContactDropdownItem) {
-    saleContactDropdownItem.addEventListener('click', function (element) {
-      if (element.target.parentNode.classList.contains(saleContactDropdownOpen)) {
-        element.target.parentNode.classList.remove(saleContactDropdownOpen);
-        Array.prototype.forEach.call(element.target.parentElement.children, function (dropDownItem) {
+  var saleContactFormValid = false;
+
+  var isPhoneNumber = function isPhoneNumber(phoneNumber) {
+    return phoneNumber.length >= 4 && phoneNumber.length <= 11 && Number.isInteger(parseInt(phoneNumber));
+  };
+
+  var isText = function isText(text) {
+    return !!text && text.length >= 1 && text.length < 45;
+  };
+
+  var isMessage = function isMessage(message) {
+    return message.length > 5 && message.length < 2000;
+  };
+
+  var isEmail = function isEmail(email) {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+  };
+
+  window.addEventListener('click', function (event) {
+    if (!event.target.classList.contains('sales-contact-form__box-field-dropdown-item')) {
+      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_required').classList.contains(saleContactDropdownOpen) ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_required').classList.remove(saleContactDropdownOpen) : '';
+      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_employees').classList.contains(saleContactDropdownOpen) ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_employees').classList.remove(saleContactDropdownOpen) : '';
+      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_activity').classList.contains(saleContactDropdownOpen) ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_activity').classList.remove(saleContactDropdownOpen) : '';
+    }
+  });
+  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-dropdown-item').forEach(function (saleContactDropdownItem) {
+    saleContactDropdownItem.addEventListener('click', function (event) {
+      if (event.target.parentNode.classList.contains(saleContactDropdownOpen)) {
+        event.target.parentNode.classList.remove(saleContactDropdownOpen);
+        Array.prototype.forEach.call(event.target.parentElement.children, function (dropDownItem) {
           dropDownItem.classList.remove(saleContactDropdownItemActive);
         });
         saleContactDropdownItem.classList.add(saleContactDropdownItemActive);
-        saleContacFormValidation(element.target.parentElement.id, saleContactDropdownItem.innerHTML);
+        saleContacFormValidation(event.target.parentElement.id, saleContactDropdownItem.innerHTML);
       } else {
-        element.target.parentNode.classList.add(saleContactDropdownOpen);
+        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_required').classList.remove(saleContactDropdownOpen);
+        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_employees').classList.remove(saleContactDropdownOpen);
+        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_activity').classList.remove(saleContactDropdownOpen);
+        event.target.parentNode.classList.add(saleContactDropdownOpen);
       }
     });
   });
-  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.form__box-field-text,.form__box-field-textarea').forEach(function (saleContactFormField) {
+  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-text,.sales-contact-form__box-field-textarea').forEach(function (saleContactFormField) {
     saleContactFormField.addEventListener('keyup', function (event) {
       saleContacFormValidation(event.target.id, event.target.value);
     });
@@ -17410,21 +17438,39 @@ window.initSalesContact = function () {
   var saleContacFormValidation = function saleContacFormValidation(key, value) {
     saleContactFormData[key] = value;
 
-    if (saleContactFormData['name'].length && saleContactFormData['businessEmail'].length && saleContactFormData['phoneNumber'].length && saleContactFormData['message'].length) {
-      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.form__submit').classList.add('form__submit--active');
+    if ( // saleContactFormData['sales-contact_form_field_name'].length && 
+    // saleContactFormData['sales-contact_form_field_business-email'].length &&
+    // saleContactFormData['sales-contact_form_field_phone-number'].length &&
+    // saleContactFormData['sales-contact_form_field_message'].length
+    isText(saleContactFormData['sales-contact_form_field_name']) && isText(saleContactFormData['sales-contact_form_field_business-email']) && isText(saleContactFormData['sales-contact_form_field_phone-number']) && isText(saleContactFormData['sales-contact_form_field_message'])) {
+      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__submit').classList.add('sales-contact-form__submit--active');
+      saleContactFormValid = true;
     } else {
-      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.form__submit').classList.remove('form__submit--active');
+      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__submit').classList.remove('sales-contact-form__submit--active');
+      saleContactFormValid = false;
     }
   };
 
-  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#salesContactSubmit').addEventListener('click', function () {
-    var regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_submit').addEventListener('click', function () {
+    if (saleContactFormValid) {
+      if (isEmail(saleContactFormData['sales-contact_form_field_business-email'])) {
+        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_business-email_container').classList.remove('sales-contact-form__box-field--error');
 
-    if (regex.test(Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#businessEmail').value)) {
-      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#emailContainer').classList.remove('form__box-field--error');
-      console.log(saleContactFormData); // call backend endpoint
-    } else {
-      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#emailContainer').classList.add('form__box-field--error');
+        if (isPhoneNumber(saleContactFormData['sales-contact_form_field_phone-number'])) {
+          Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_phone-number_container').classList.remove('sales-contact-form__box-field--error');
+
+          if (isMessage(saleContactFormData['sales-contact_form_field_message'])) {
+            Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_message_container').classList.remove('sales-contact-form__box-field--error');
+            console.log(saleContactFormData); // call backend endpoint
+          } else {
+            Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_message_container').classList.add('sales-contact-form__box-field--error');
+          }
+        } else {
+          Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_phone-number_container').classList.add('sales-contact-form__box-field--error');
+        }
+      } else {
+        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_business-email_container').classList.add('sales-contact-form__box-field--error');
+      }
     }
   });
 };
