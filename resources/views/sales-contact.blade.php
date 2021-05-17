@@ -18,9 +18,10 @@
                         فرم زیر را پر کنید تا در اولین فرصت به شکل تلفنی با شما گفتگو کنیم و به سوالات شما درخصوص فروش پاسخ دهیم
                         </div>
                         <div class="sales-contact-form__box-fields">
-                            <div class="sales-contact-form__box-field">
+                            <div class="sales-contact-form__box-field"  id="sales-contact_name_container">
                                 <label class="sales-contact-form__box-field-label sales-contact-form__box-field-label--required" for="sales-contact_form_field_name">نام و نام خانوادگی</label>
                                 <input class="sales-contact-form__box-field-text" type="text" id="sales-contact_form_field_name">
+                                <div class="sales-contact-form__box-field-error-message"></div>
                             </div>
                             <div class="sales-contact-form__box-field">
                                 <label class="sales-contact-form__box-field-label" for="sales-contact_form_field_job-position">سمت شغلی</label>
@@ -29,12 +30,12 @@
                             <div class="sales-contact-form__box-field" id="sales-contact_business-email_container">
                                 <label class="sales-contact-form__box-field-label sales-contact-form__box-field-label--required" for="sales-contact_form_field_business-email">ایمیل کاری</label>
                                 <input class="sales-contact-form__box-field-text" type="text" id="sales-contact_form_field_business-email">
-                                <div class="sales-contact-form__box-field-error-message">ایمیل وارد شده معتبر نمیباشد.</div>
+                                <div class="sales-contact-form__box-field-error-message"></div>
                             </div>
                             <div class="sales-contact-form__box-field" id="sales-contact_phone-number_container">
                                 <label class="sales-contact-form__box-field-label sales-contact-form__box-field-label--required" for="sales-contact_form_field_phone-number">شماره تماس</label>
                                 <input class="sales-contact-form__box-field-text" type="text" id="sales-contact_form_field_phone-number">
-                                <div class="sales-contact-form__box-field-error-message">شماره تلفن وارد شده معتبر نمیباشد.</div>
+                                <div class="sales-contact-form__box-field-error-message"></div>
                             </div>
                             <div class="sales-contact-form__box-field">
                                 <label class="sales-contact-form__box-field-label" for="sales-contact_form_field_company-name">نام شرکت</label>
@@ -48,6 +49,7 @@
                                 <label class="sales-contact-form__box-field-label" for="sales-contact_form_field_activity">حوزه فعالیت</label>
                                 <ul class="sales-contact-form__box-field-dropdown" id="sales-contact_form_field_activity">
                                     <div class="sales-contact-form__box-field-dropdown-toggle">@svg('svg/sales-contact/arrow-down.svg')</div>
+                                    <li class="sales-contact-form__box-field-dropdown-item sales-contact-form__box-field-dropdown-item--head">انتخاب کنید</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">حمل و نقل و گردشگری</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">شبکه و زیرساخت</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">کامپیوتر و نرم‌افزار</li>
@@ -64,6 +66,7 @@
                                 <label class="sales-contact-form__box-field-label" for="sales-contact_form_field_employees">تعداد کارمندان</label>
                                 <ul class="sales-contact-form__box-field-dropdown" id="sales-contact_form_field_employees">
                                     <div class="sales-contact-form__box-field-dropdown-toggle">@svg('svg/sales-contact/arrow-down.svg')</div>
+                                    <li class="sales-contact-form__box-field-dropdown-item sales-contact-form__box-field-dropdown-item--head">انتخاب کنید</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">۱ تا ۱۰ نفر</li>        
                                     <li class="sales-contact-form__box-field-dropdown-item">۱۱ تا ۵۰ نفر</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">۵۱ تا ۲۰۰ نفر</li>
@@ -75,8 +78,9 @@
                                 <label class="sales-contact-form__box-field-label" for="sales-contact_form_field_required">سرویس مورد نیاز</label>
                                 <ul class="sales-contact-form__box-field-dropdown" id="sales-contact_form_field_required">
                                     <div class="sales-contact-form__box-field-dropdown-toggle">@svg('svg/sales-contact/arrow-down.svg')</div>
-                                    <li class="sales-contact-form__box-field-dropdown-item">شبکه توزیع محتوا و امنیت (CDN & Security)</li>
-                                    <li class="sales-contact-form__box-field-dropdown-item">رایانش ابری (Cloud Server & PaaS)</li>
+                                    <li class="sales-contact-form__box-field-dropdown-item sales-contact-form__box-field-dropdown-item--head">انتخاب کنید</li>
+                                    <li class="sales-contact-form__box-field-dropdown-item" data-parent="">شبکه توزیع محتوا و امنیت (CDN & Security)</li>
+                                    <li class="sales-contact-form__box-field-dropdown-item">رایانش ابری (Cloud Server & PaaS)</span></li>
                                     <li class="sales-contact-form__box-field-dropdown-item">پلتفرم ویدیویی و پخش زنده (Video & Live Streaming)</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">فضای ذخیره‌سازی ابری (Object & Block Storage)</li>
                                     <li class="sales-contact-form__box-field-dropdown-item">پشتیبانی و کوچ ابری (Tech Support & Cloud Adoption)</li>
@@ -88,7 +92,7 @@
                             <div class="sales-contact-form__box-field--full" id="sales-contact_message_container">
                                 <label class="sales-contact-form__box-field-label sales-contact-form__box-field-label--required" for="sales-contact_form_field_message">متن پیام</label>
                                 <textarea class="sales-contact-form__box-field-textarea" id="sales-contact_form_field_message"></textarea>
-                                <div class="sales-contact-form__box-field-error-message">پیام وارد شده معتبر نمیباشد.</div>
+                                <div class="sales-contact-form__box-field-error-message"></div>
                             </div>
                         </div>
                     </div>

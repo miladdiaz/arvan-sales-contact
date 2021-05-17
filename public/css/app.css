@@ -11056,12 +11056,18 @@ a.text-dark:focus {
   position: relative;
 }
 
-.sales-contact-form__box-field--error input {
-  border: 1px solid red;
+.sales-contact-form__box-field--error input,
+.sales-contact-form__box-field--error textarea {
+  border: 2px solid #EE5353 !important;
 }
 
 .sales-contact-form__box-field--error .sales-contact-form__box-field-error-message {
   display: block;
+}
+
+.sales-contact-form__box-field--valid input,
+.sales-contact-form__box-field--valid textarea {
+  border: 2px solid #20C5BA;
 }
 
 .sales-contact-form__box-field-error-message {
@@ -11089,8 +11095,14 @@ a.text-dark:focus {
   background: #EEF2F7;
   border-radius: 12px;
   height: 48px;
-  border: none;
+  border: 2px solid transparent;
   outline: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.sales-contact-form__box-field-text:focus {
+  border: 2px solid rgba(32, 197, 186, 0.4);
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.08);
 }
 
 .sales-contact-form__box-field-dropdown {
@@ -11098,7 +11110,7 @@ a.text-dark:focus {
   background-color: #EEF2F7;
   border: 2px solid #EEF2F7;
   border-radius: 12px;
-  padding: 0 24px;
+  padding: 0 12px;
   max-height: 48px;
   overflow: hidden;
   display: flex;
@@ -11111,11 +11123,15 @@ a.text-dark:focus {
   background-color: #FFFFFF;
   border: 2px solid #20C5BA;
   max-height: 1000px;
-  padding: 24px;
+  padding: 12px;
 }
 
 .sales-contact-form__box-field-dropdown--open .sales-contact-form__box-field-dropdown-toggle {
   opacity: 0;
+}
+
+.sales-contact-form__box-field-dropdown--open .sales-contact-form__box-field-dropdown-item--head {
+  order: 0;
 }
 
 .sales-contact-form__box-field-dropdown-toggle {
@@ -11132,19 +11148,32 @@ a.text-dark:focus {
 
 .sales-contact-form__box-field-dropdown-item {
   color: #465A71;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 12px;
   cursor: pointer;
-  order: 2;
+  order: 3;
   transition: all 0.15s ease-in-out;
+}
+
+.sales-contact-form__box-field-dropdown-item:hover {
+  background-color: #EEF2F7;
+}
+
+.sales-contact-form__box-field-dropdown-item--head {
+  color: #8499B7;
+  order: 2;
+}
+
+.sales-contact-form__box-field-dropdown-item--head:hover {
+  background-color: transparent;
 }
 
 .sales-contact-form__box-field-dropdown-item--active {
   order: 1;
 }
 
-.sales-contact-form__box-field-dropdown-item:hover {
-  background-color: #EEF2F7;
+.sales-contact-form__box-field-dropdown-item-english {
+  display: none;
 }
 
 .sales-contact-form__box-field-hint {
@@ -11158,9 +11187,15 @@ a.text-dark:focus {
   background-color: #EEF2F7;
   border-radius: 12px;
   padding: 16px 24px;
-  border: none;
+  border: 2px solid transparent;
   outline: none;
   overflow: hidden;
+  transition: all 0.15s ease-in-out;
+}
+
+.sales-contact-form__box-field-textarea:focus {
+  border: 2px solid rgba(32, 197, 186, 0.4);
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.08);
 }
 
 .sales-contact-form__submit-container {
@@ -11168,11 +11203,11 @@ a.text-dark:focus {
 }
 
 .sales-contact-form__submit {
-  background-color: #E7ECF4;
-  color: #697D9A;
+  background-color: #20C5BA;
+  color: #fff;
   border-radius: 12px;
   padding: 12px 0;
-  width: 196px;
+  width: 100%;
   border: none;
   margin-top: 32px;
   font-weight: 500;
@@ -11181,12 +11216,7 @@ a.text-dark:focus {
   transition: all 0.15s ease-in-out;
 }
 
-.sales-contact-form__submit--active {
-  background-color: #20C5BA;
-  color: #fff;
-}
-
-.sales-contact-form__submit--active:hover {
+.sales-contact-form__submit:hover {
   background-color: #00A09C;
 }
 
@@ -11206,6 +11236,16 @@ a.text-dark:focus {
 
   .sales-contact-form__box-field {
     flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .sales-contact-form__box-field-dropdown-item-english {
+    display: inline;
+  }
+
+  .sales-contact-form__submit {
+    width: 196px;
   }
 }
 
@@ -11246,7 +11286,7 @@ a.text-dark:focus {
 }
 
 .sales-contact-links__box-button {
-  width: 240px;
+  width: 100%;
   height: 48px;
   margin: auto;
   background-color: #20C5BA;
@@ -11299,6 +11339,10 @@ a.text-dark:focus {
 
   .sales-contact-links__box-phone {
     width: 100%;
+  }
+
+  .sales-contact-links__box-button {
+    width: 240px;
   }
 }
 

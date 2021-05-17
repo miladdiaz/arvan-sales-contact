@@ -17381,13 +17381,7 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
 window.initSalesContact = function () {
   var saleContactDropdownOpen = 'sales-contact-form__box-field-dropdown--open';
   var saleContactDropdownItemActive = 'sales-contact-form__box-field-dropdown-item--active';
-  var saleContactFormData = {
-    'sales-contact_form_field_name': '',
-    'sales-contact_form_field_business-email': '',
-    'sales-contact_form_field_phone-number': '',
-    'sales-contact_form_field_message': ''
-  };
-  var saleContactFormValid = false;
+  var saleContactFormData = {};
 
   var isPhoneNumber = function isPhoneNumber(phoneNumber) {
     return phoneNumber.length >= 4 && phoneNumber.length <= 11 && Number.isInteger(parseInt(phoneNumber));
@@ -17414,64 +17408,71 @@ window.initSalesContact = function () {
   });
   Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-dropdown-item').forEach(function (saleContactDropdownItem) {
     saleContactDropdownItem.addEventListener('click', function (event) {
-      if (event.target.parentNode.classList.contains(saleContactDropdownOpen)) {
-        event.target.parentNode.classList.remove(saleContactDropdownOpen);
-        Array.prototype.forEach.call(event.target.parentElement.children, function (dropDownItem) {
+      var Dropdown = saleContactDropdownItem.parentNode;
+
+      if (Dropdown.classList.contains(saleContactDropdownOpen)) {
+        Dropdown.classList.remove(saleContactDropdownOpen);
+        Array.prototype.forEach.call(Dropdown.children, function (dropDownItem) {
           dropDownItem.classList.remove(saleContactDropdownItemActive);
         });
         saleContactDropdownItem.classList.add(saleContactDropdownItemActive);
-        saleContacFormValidation(event.target.parentElement.id, saleContactDropdownItem.innerHTML);
+
+        if (!saleContactDropdownItem.classList.contains('sales-contact-form__box-field-dropdown-item--head')) {
+          saleContactFormData[Dropdown.id] = saleContactDropdownItem.innerHTML;
+        } else {
+          saleContactFormData[Dropdown.id] = '';
+        }
       } else {
         Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_required').classList.remove(saleContactDropdownOpen);
         Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_employees').classList.remove(saleContactDropdownOpen);
         Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_activity').classList.remove(saleContactDropdownOpen);
-        event.target.parentNode.classList.add(saleContactDropdownOpen);
+        Dropdown.classList.add(saleContactDropdownOpen);
       }
     });
   });
-  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-text,.sales-contact-form__box-field-textarea').forEach(function (saleContactFormField) {
-    saleContactFormField.addEventListener('keyup', function (event) {
-      saleContacFormValidation(event.target.id, event.target.value);
-    });
-  });
 
-  var saleContacFormValidation = function saleContacFormValidation(key, value) {
-    saleContactFormData[key] = value;
+  var saleContacFormValidation = function saleContacFormValidation(element) {
+    saleContactFormData[element.id] = element.value;
+    var errorMessage = {
+      'sales-contact_form_field_name': 'نام وارد شده معتبر نمیباشد',
+      'sales-contact_form_field_business-email': 'ایمیل وارد شده معتبر نمیباشد.',
+      'sales-contact_form_field_phone-number': 'شماره تلفن وارد شده معتبر نمیباشد.',
+      'sales-contact_form_field_message': 'پیام وارد شده معتبر نمیباشد.'
+    };
+    var validator = null;
+    if (element.id === 'sales-contact_form_field_name') validator = isText;
+    if (element.id === 'sales-contact_form_field_business-email') validator = isEmail;
+    if (element.id === 'sales-contact_form_field_phone-number') validator = isPhoneNumber;
+    if (element.id === 'sales-contact_form_field_message') validator = isMessage;
 
-    if ( // saleContactFormData['sales-contact_form_field_name'].length && 
-    // saleContactFormData['sales-contact_form_field_business-email'].length &&
-    // saleContactFormData['sales-contact_form_field_phone-number'].length &&
-    // saleContactFormData['sales-contact_form_field_message'].length
-    isText(saleContactFormData['sales-contact_form_field_name']) && isText(saleContactFormData['sales-contact_form_field_business-email']) && isText(saleContactFormData['sales-contact_form_field_phone-number']) && isText(saleContactFormData['sales-contact_form_field_message'])) {
-      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__submit').classList.add('sales-contact-form__submit--active');
-      saleContactFormValid = true;
-    } else {
-      Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__submit').classList.remove('sales-contact-form__submit--active');
-      saleContactFormValid = false;
+    if (validator) {
+      if (validator(element.value)) {
+        element.parentElement.classList.add('sales-contact-form__box-field--valid');
+        element.parentElement.classList.remove('sales-contact-form__box-field--error');
+      } else {
+        element.parentElement.classList.remove('sales-contact-form__box-field--valid');
+        element.parentElement.classList.add('sales-contact-form__box-field--error');
+
+        if (element.value.length) {
+          element.parentElement.querySelectorAll('.sales-contact-form__box-field-error-message')[0].innerHTML = errorMessage[element.id];
+        } else {
+          element.parentElement.querySelectorAll('.sales-contact-form__box-field-error-message')[0].innerHTML = 'پر کردن این فیلد ضروری است';
+        }
+      }
     }
   };
 
+  Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-text,.sales-contact-form__box-field-textarea').forEach(function (saleContactFormField) {
+    saleContactFormField.addEventListener('focusout', function (event) {
+      saleContacFormValidation(event.target);
+    });
+  });
   Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_submit').addEventListener('click', function () {
-    if (saleContactFormValid) {
-      if (isEmail(saleContactFormData['sales-contact_form_field_business-email'])) {
-        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_business-email_container').classList.remove('sales-contact-form__box-field--error');
-
-        if (isPhoneNumber(saleContactFormData['sales-contact_form_field_phone-number'])) {
-          Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_phone-number_container').classList.remove('sales-contact-form__box-field--error');
-
-          if (isMessage(saleContactFormData['sales-contact_form_field_message'])) {
-            Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_message_container').classList.remove('sales-contact-form__box-field--error');
-            console.log(saleContactFormData); // call backend endpoint
-          } else {
-            Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_message_container').classList.add('sales-contact-form__box-field--error');
-          }
-        } else {
-          Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_phone-number_container').classList.add('sales-contact-form__box-field--error');
-        }
-      } else {
-        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_business-email_container').classList.add('sales-contact-form__box-field--error');
-      }
-    }
+    var requiredFieldId = ['sales-contact_form_field_name', 'sales-contact_form_field_business-email', 'sales-contact_form_field_phone-number', 'sales-contact_form_field_message'];
+    requiredFieldId.forEach(function (item, index) {
+      saleContacFormValidation(Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#' + item));
+    });
+    console.log(saleContactFormData);
   });
 };
 
@@ -17519,8 +17520,8 @@ var $ = function $(query) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/milad/Desktop/arvan-sales-contact/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/milad/Desktop/arvan-sales-contact/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/milad/Desktop/Arvan/arvan-sales-contact/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/milad/Desktop/Arvan/arvan-sales-contact/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

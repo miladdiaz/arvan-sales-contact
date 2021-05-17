@@ -4,13 +4,7 @@ import { $ } from './utils/dom';
 window.initSalesContact = () =>{
     const saleContactDropdownOpen = 'sales-contact-form__box-field-dropdown--open';
     const saleContactDropdownItemActive = 'sales-contact-form__box-field-dropdown-item--active';
-    const saleContactFormData = {
-        'sales-contact_form_field_name': '',
-        'sales-contact_form_field_business-email': '',
-        'sales-contact_form_field_phone-number': '',
-        'sales-contact_form_field_message': '',
-    };
-    let saleContactFormValid = false;
+    const saleContactFormData = {};
 
     const isPhoneNumber = phoneNumber => ((phoneNumber.length >= 4  && phoneNumber.length <= 11) && Number.isInteger(parseInt(phoneNumber)));
     const isText = text => (!!text && text.length >= 1 && text.length < 45);
@@ -22,77 +16,77 @@ window.initSalesContact = () =>{
             ($('#sales-contact_form_field_required').classList.contains(saleContactDropdownOpen)) ? $('#sales-contact_form_field_required').classList.remove(saleContactDropdownOpen):'';
             ($('#sales-contact_form_field_employees').classList.contains(saleContactDropdownOpen)) ? $('#sales-contact_form_field_employees').classList.remove(saleContactDropdownOpen):'';
             ($('#sales-contact_form_field_activity').classList.contains(saleContactDropdownOpen)) ? $('#sales-contact_form_field_activity').classList.remove(saleContactDropdownOpen):'';
-            
         }
     });
 
     $('.sales-contact-form__box-field-dropdown-item').forEach(saleContactDropdownItem => {
         saleContactDropdownItem.addEventListener('click', (event) => {
-
-            if(event.target.parentNode.classList.contains(saleContactDropdownOpen)){
-                event.target.parentNode.classList.remove(saleContactDropdownOpen);
-                Array.prototype.forEach.call(event.target.parentElement.children, dropDownItem => {
+            let Dropdown = saleContactDropdownItem.parentNode;
+            
+            if (Dropdown.classList.contains(saleContactDropdownOpen)){
+                Dropdown.classList.remove(saleContactDropdownOpen);
+                Array.prototype.forEach.call(Dropdown.children, dropDownItem => {
                     dropDownItem.classList.remove(saleContactDropdownItemActive);
                 });
                 saleContactDropdownItem.classList.add(saleContactDropdownItemActive);
-                saleContacFormValidation(event.target.parentElement.id, saleContactDropdownItem.innerHTML);
+
+                if (!saleContactDropdownItem.classList.contains('sales-contact-form__box-field-dropdown-item--head')) {
+                    saleContactFormData[Dropdown.id] = saleContactDropdownItem.innerHTML;
+                }else{
+                    saleContactFormData[Dropdown.id] = '';
+                }
             }else{
                 $('#sales-contact_form_field_required').classList.remove(saleContactDropdownOpen);
                 $('#sales-contact_form_field_employees').classList.remove(saleContactDropdownOpen);
                 $('#sales-contact_form_field_activity').classList.remove(saleContactDropdownOpen);
-
-                event.target.parentNode.classList.add(saleContactDropdownOpen);
+                Dropdown.classList.add(saleContactDropdownOpen);
             }
-            
         });
     });
+
+    const saleContacFormValidation = (element) => {
+        saleContactFormData[element.id] = element.value;
+
+        let errorMessage = {
+            'sales-contact_form_field_name': 'نام وارد شده معتبر نمیباشد',
+            'sales-contact_form_field_business-email': 'ایمیل وارد شده معتبر نمیباشد.',
+            'sales-contact_form_field_phone-number': 'شماره تلفن وارد شده معتبر نمیباشد.',
+            'sales-contact_form_field_message': 'پیام وارد شده معتبر نمیباشد.'
+        };
+
+        let validator = null;
+        if (element.id === 'sales-contact_form_field_name') validator = isText;
+        if (element.id === 'sales-contact_form_field_business-email') validator = isEmail;
+        if (element.id === 'sales-contact_form_field_phone-number') validator = isPhoneNumber;
+        if (element.id === 'sales-contact_form_field_message') validator = isMessage;
+
+        if (validator) {
+            if (validator(element.value)) {
+                element.parentElement.classList.add('sales-contact-form__box-field--valid');
+                element.parentElement.classList.remove('sales-contact-form__box-field--error');                
+            } else {
+                element.parentElement.classList.remove('sales-contact-form__box-field--valid');
+                element.parentElement.classList.add('sales-contact-form__box-field--error');
+                if (element.value.length) {
+                    element.parentElement.querySelectorAll('.sales-contact-form__box-field-error-message')[0].innerHTML = errorMessage[element.id]
+                }else{
+                    element.parentElement.querySelectorAll('.sales-contact-form__box-field-error-message')[0].innerHTML = 'پر کردن این فیلد ضروری است';
+                }
+            }
+        }
+    };
 
     $('.sales-contact-form__box-field-text,.sales-contact-form__box-field-textarea').forEach(saleContactFormField => {
-        saleContactFormField.addEventListener('keyup', (event) => {
-            saleContacFormValidation(event.target.id, event.target.value);
+        saleContactFormField.addEventListener('focusout', (event) => {
+            saleContacFormValidation(event.target);
         });
     });
-    
-    const saleContacFormValidation = (key, value) =>{
-        saleContactFormData[key] = value;
-        if(
-        // saleContactFormData['sales-contact_form_field_name'].length && 
-        // saleContactFormData['sales-contact_form_field_business-email'].length &&
-        // saleContactFormData['sales-contact_form_field_phone-number'].length &&
-        // saleContactFormData['sales-contact_form_field_message'].length
-        isText(saleContactFormData['sales-contact_form_field_name']) &&
-        isText(saleContactFormData['sales-contact_form_field_business-email']) &&
-        isText(saleContactFormData['sales-contact_form_field_phone-number']) &&
-        isText(saleContactFormData['sales-contact_form_field_message'])
-        ){
-            $('.sales-contact-form__submit').classList.add('sales-contact-form__submit--active');
-            saleContactFormValid = true;
-        }else{
-            $('.sales-contact-form__submit').classList.remove('sales-contact-form__submit--active');
-            saleContactFormValid = false
-        }
-    }
 
     $('#sales-contact_submit').addEventListener('click', () => {
-        if(saleContactFormValid){
-            if (isEmail(saleContactFormData['sales-contact_form_field_business-email'])) {
-                $('#sales-contact_business-email_container').classList.remove('sales-contact-form__box-field--error');
-               if (isPhoneNumber(saleContactFormData['sales-contact_form_field_phone-number'])) {
-                    $('#sales-contact_phone-number_container').classList.remove('sales-contact-form__box-field--error');
-                    if (isMessage(saleContactFormData['sales-contact_form_field_message'])) {
-                        $('#sales-contact_message_container').classList.remove('sales-contact-form__box-field--error');
-                        console.log(saleContactFormData);
-                        // call backend endpoint
-                    }else{
-                        $('#sales-contact_message_container').classList.add('sales-contact-form__box-field--error');
-                    }
-               }else{
-                $('#sales-contact_phone-number_container').classList.add('sales-contact-form__box-field--error');
-               }
-    
-            }else{
-                $('#sales-contact_business-email_container').classList.add('sales-contact-form__box-field--error');
-            }
-        }
+        let requiredFieldId = ['sales-contact_form_field_name', 'sales-contact_form_field_business-email', 'sales-contact_form_field_phone-number', 'sales-contact_form_field_message'];
+        requiredFieldId.forEach((item, index)=>{
+            saleContacFormValidation($('#' + item));
+        });
+        console.log(saleContactFormData);
     });
 }
