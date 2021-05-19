@@ -11059,6 +11059,7 @@ a.text-dark:focus {
 .sales-contact-form__box-field--error input,
 .sales-contact-form__box-field--error textarea {
   border: 2px solid #EE5353 !important;
+  background-color: #FFFFFF;
 }
 
 .sales-contact-form__box-field--error .sales-contact-form__box-field-error-message {
@@ -11068,6 +11069,7 @@ a.text-dark:focus {
 .sales-contact-form__box-field--valid input,
 .sales-contact-form__box-field--valid textarea {
   border: 2px solid #20C5BA;
+  background-color: #FFFFFF;
 }
 
 .sales-contact-form__box-field-error-message {
@@ -11172,7 +11174,7 @@ a.text-dark:focus {
   order: 1;
 }
 
-.sales-contact-form__box-field-dropdown-item-english {
+.sales-contact-form__box-field-dropdown-subitem {
   display: none;
 }
 
@@ -11240,7 +11242,7 @@ a.text-dark:focus {
 }
 
 @media (min-width: 992px) {
-  .sales-contact-form__box-field-dropdown-item-english {
+  .sales-contact-form__box-field-dropdown-subitem {
     display: inline;
   }
 

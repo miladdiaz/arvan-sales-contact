@@ -76,15 +76,15 @@
                             </div>
                             <div class="sales-contact-form__box-field">
                                 <label class="sales-contact-form__box-field-label" for="sales-contact_form_field_required">سرویس مورد نیاز</label>
-                                <ul class="sales-contact-form__box-field-dropdown" id="sales-contact_form_field_required">
+                                <div class="sales-contact-form__box-field-dropdown" id="sales-contact_form_field_required">
                                     <div class="sales-contact-form__box-field-dropdown-toggle">@svg('svg/sales-contact/arrow-down.svg')</div>
                                     <li class="sales-contact-form__box-field-dropdown-item sales-contact-form__box-field-dropdown-item--head">انتخاب کنید</li>
-                                    <li class="sales-contact-form__box-field-dropdown-item" data-parent="">شبکه توزیع محتوا و امنیت (CDN & Security)</li>
-                                    <li class="sales-contact-form__box-field-dropdown-item">رایانش ابری (Cloud Server & PaaS)</span></li>
-                                    <li class="sales-contact-form__box-field-dropdown-item">پلتفرم ویدیویی و پخش زنده (Video & Live Streaming)</li>
-                                    <li class="sales-contact-form__box-field-dropdown-item">فضای ذخیره‌سازی ابری (Object & Block Storage)</li>
-                                    <li class="sales-contact-form__box-field-dropdown-item">پشتیبانی و کوچ ابری (Tech Support & Cloud Adoption)</li>
-                                </ul>
+                                    <li class="sales-contact-form__box-field-dropdown-item">شبکه توزیع محتوا و امنیت <span class="sales-contact-form__box-field-dropdown-subitem">(CDN & Security)</span></li>
+                                    <li class="sales-contact-form__box-field-dropdown-item">رایانش ابری <span class="sales-contact-form__box-field-dropdown-subitem">(Cloud Server & PaaS)</span></li>
+                                    <li class="sales-contact-form__box-field-dropdown-item">پلتفرم ویدیویی و پخش زنده <span class="sales-contact-form__box-field-dropdown-subitem">(Video & Live Streaming)</span></li>
+                                    <li class="sales-contact-form__box-field-dropdown-item">فضای ذخیره‌سازی ابری <span class="sales-contact-form__box-field-dropdown-subitem">(Object & Block Storage)</span></li>
+                                    <li class="sales-contact-form__box-field-dropdown-item">پشتیبانی و کوچ ابری <span class="sales-contact-form__box-field-dropdown-subitem">(Tech Support & Cloud Adoption)</span></li>
+                                </div>
                             </div>
                             <div class="sales-contact-form__box-field">
                                 <div class="sales-contact-form__box-field-hint">* پر کردن فیلدهایی که با ستاره مشخص شده ضروری است</div>

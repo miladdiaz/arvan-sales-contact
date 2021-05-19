@@ -49,6 +49,7 @@
         &--error{
             input, textarea{
                 border: 2px solid #EE5353!important;
+                background-color: #FFFFFF;
             }
             .sales-contact-form__box-field-error-message{
                 display: block;
@@ -57,6 +58,7 @@
         &--valid{
             input, textarea{
                 border: 2px solid #20C5BA;
+                background-color: #FFFFFF;
             }
         }
     }
@@ -148,7 +150,7 @@
             order: 1;
         }
     }
-    &__box-field-dropdown-item-english{
+    &__box-field-dropdown-subitem{
         display: none;
     }
     &__box-field-hint{
@@ -208,7 +210,7 @@
 }
 @media(min-width:992px){
     .sales-contact-form{
-        &__box-field-dropdown-item-english{
+        &__box-field-dropdown-subitem{
             display: inline;
         }
         &__submit{
@@ -282,7 +284,6 @@
         line-height: 28px;
     }
 }
-
 @media(min-width:768px){
     .sales-contact-links{
         padding: 128px 0;

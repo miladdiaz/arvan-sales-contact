@@ -17400,7 +17400,7 @@ window.initSalesContact = function () {
   };
 
   window.addEventListener('click', function (event) {
-    if (!event.target.classList.contains('sales-contact-form__box-field-dropdown-item')) {
+    if (!event.target.classList.contains('sales-contact-form__box-field-dropdown-item') && !event.target.classList.contains('sales-contact-form__box-field-dropdown-subitem')) {
       Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_required').classList.contains(saleContactDropdownOpen) ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_required').classList.remove(saleContactDropdownOpen) : '';
       Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_employees').classList.contains(saleContactDropdownOpen) ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_employees').classList.remove(saleContactDropdownOpen) : '';
       Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_activity').classList.contains(saleContactDropdownOpen) ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_form_field_activity').classList.remove(saleContactDropdownOpen) : '';
@@ -17408,7 +17408,7 @@ window.initSalesContact = function () {
   });
   Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-dropdown-item').forEach(function (saleContactDropdownItem) {
     saleContactDropdownItem.addEventListener('click', function (event) {
-      var Dropdown = saleContactDropdownItem.parentNode;
+      var Dropdown = event.currentTarget.parentNode;
 
       if (Dropdown.classList.contains(saleContactDropdownOpen)) {
         Dropdown.classList.remove(saleContactDropdownOpen);
@@ -17418,7 +17418,13 @@ window.initSalesContact = function () {
         saleContactDropdownItem.classList.add(saleContactDropdownItemActive);
 
         if (!saleContactDropdownItem.classList.contains('sales-contact-form__box-field-dropdown-item--head')) {
-          saleContactFormData[Dropdown.id] = saleContactDropdownItem.innerHTML;
+          if (Dropdown.id === 'sales-contact_form_field_required') {
+            var value = saleContactDropdownItem.innerHTML.replace('<span class="sales-contact-form__box-field-dropdown-subitem">', '');
+            value = value.replace('</span>', '');
+            saleContactFormData[Dropdown.id] = value;
+          } else {
+            saleContactFormData[Dropdown.id] = saleContactDropdownItem.innerHTML;
+          }
         } else {
           saleContactFormData[Dropdown.id] = '';
         }
@@ -17439,18 +17445,20 @@ window.initSalesContact = function () {
       'sales-contact_form_field_phone-number': 'شماره تلفن وارد شده معتبر نمیباشد.',
       'sales-contact_form_field_message': 'پیام وارد شده معتبر نمیباشد.'
     };
-    var validator = null;
+    var validator = isText;
+    ;
     if (element.id === 'sales-contact_form_field_name') validator = isText;
     if (element.id === 'sales-contact_form_field_business-email') validator = isEmail;
     if (element.id === 'sales-contact_form_field_phone-number') validator = isPhoneNumber;
     if (element.id === 'sales-contact_form_field_message') validator = isMessage;
 
-    if (validator) {
-      if (validator(element.value)) {
-        element.parentElement.classList.add('sales-contact-form__box-field--valid');
-        element.parentElement.classList.remove('sales-contact-form__box-field--error');
-      } else {
-        element.parentElement.classList.remove('sales-contact-form__box-field--valid');
+    if (validator(element.value)) {
+      element.parentElement.classList.add('sales-contact-form__box-field--valid');
+      element.parentElement.classList.remove('sales-contact-form__box-field--error');
+    } else {
+      element.parentElement.classList.remove('sales-contact-form__box-field--valid');
+
+      if (element.parentElement.id) {
         element.parentElement.classList.add('sales-contact-form__box-field--error');
 
         if (element.value.length) {
@@ -17465,6 +17473,9 @@ window.initSalesContact = function () {
   Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('.sales-contact-form__box-field-text,.sales-contact-form__box-field-textarea').forEach(function (saleContactFormField) {
     saleContactFormField.addEventListener('focusout', function (event) {
       saleContacFormValidation(event.target);
+    });
+    saleContactFormField.addEventListener('focus', function (event) {
+      event.target.parentElement.classList.remove('sales-contact-form__box-field--error');
     });
   });
   Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["$"])('#sales-contact_submit').addEventListener('click', function () {
